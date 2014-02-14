@@ -25,15 +25,12 @@ public class CaptchaDaoAuthenticationProvider extends DaoAuthenticationProvider 
 
 		CaptchaAuthenticationDetails captchaDetails = (CaptchaAuthenticationDetails) obj;
 		Captcha captcha = captchaDetails.getCaptcha();
-		if (captcha == null) {
-			throw new InsufficientAuthenticationException(
-					"Captcha not found in the session.");
-		}
-
-		String expected = captcha.getAnswer();
-		String actual = captchaDetails.getAnswer();
-		if (!expected.equals(actual)) {
-			throw new BadCredentialsException("Captcha does not match.");
+		if (captcha != null) {
+			String expected = captcha.getAnswer();
+			String actual = captchaDetails.getAnswer();
+			if (!expected.equals(actual)) {
+				throw new BadCredentialsException("Captcha does not match.");
+			}
 		}
 	}
 
