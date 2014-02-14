@@ -7,8 +7,8 @@ It demonstrates a way how to introduce a CAPTCHA verification into the form logi
 
 To generate CAPTCHAs the [SimpleCapctha library](http://simplecaptcha.sourceforge.net/) is used.
 
-How to install SimpleCaptcha dependencies in your local Maven repo
-------------------------------------------------------------------
+How to install SimpleCaptcha to your local Maven repo
+-----------------------------------------------------
 ```shell
 mvn install:install-file -Dfile=./lib/simplecaptcha-1.2.jar -DgroupId=nl.captcha -DartifactId=simplecaptcha -Dversion=1.2 -Dpackaging=jar
 ```
