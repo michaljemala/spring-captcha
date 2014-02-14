@@ -5,7 +5,7 @@ Spring Security SimpleCaptcha integration sample.
 
 It demonstrates a way how to introduce a CAPTCHA verification into the form logins. After 3 unsuccessful login attempts a CAPTCHA will required to be provided.
 
-To generate CAPTCHAs the [SimpleCapctha library](http://simplecaptcha.sourceforge.net/) is used.
+To generate CAPTCHAs the [SimpleCaptcha library](http://simplecaptcha.sourceforge.net/) is used.
 
 How to install SimpleCaptcha to your local Maven repo
 -----------------------------------------------------
