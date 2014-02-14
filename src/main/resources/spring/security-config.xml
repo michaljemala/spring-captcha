@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<sec:http use-expressions="true">
+		<sec:intercept-url pattern="/secure" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/**" access="permitAll" />
+		<sec:form-login 
+			login-page="/login"
+			default-target-url="/"
+			authentication-failure-url="/login?error=1"
+			authentication-details-source-ref="captchaDetailsSource" />
+		<sec:logout delete-cookies="JSESSIONID" />
+	</sec:http>
+
+	<bean id="captchaDetailsSource" class="com.example.security.captcha.CaptchaAuthenticationDetailsSource" />
+
+	<sec:authentication-manager>
+		<sec:authentication-provider ref="authenticationProvider"/>
+	</sec:authentication-manager>
+
+	<bean id="authenticationProvider"
+		class="com.example.security.captcha.CaptchaDaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailService"/>
+		<property name="passwordEncoder">
+			<bean class="org.springframework.security.authentication.encoding.PlaintextPasswordEncoder"/>
+		</property>
+	</bean>
+
+	<sec:user-service id="userDetailService">
+		<sec:user name="bob" password="secret" authorities="SOME_ROLE" />
+	</sec:user-service>
+	
+	<bean class="com.example.web.AuthenticationResultListener"/>
+
+</beans>
